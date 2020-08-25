@@ -29,7 +29,7 @@ jobs:
       - name: Install dependencies to run the server
         run: |
           apt-get update
-          apt-get install apache2 libapache2-mod-php7.2 -y
+          apt-get install libapache2-mod-php7.2 -y
           a2enmod rewrite
           apache2ctl restart
 
@@ -41,11 +41,6 @@ jobs:
           amp config:set --db_type=mysql_dsn --mysql_dsn='mysql://root:root@mysql:3306' --httpd_type=apache24 --httpd_restart_command='sudo /usr/sbin/apache2ctl graceful' --perm_type=worldWritable --hosts_type=file
           echo "IncludeOptional /github/home/.amp/apache.d/*.conf" >> /etc/apache2/apache2.conf
           /usr/sbin/apache2ctl restart
-
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
-        with:
-          node-version: '10.15.3'
 
       - name: Build Drupal site
         run: |
