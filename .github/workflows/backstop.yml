@@ -10,7 +10,7 @@ jobs:
     if: github.event.label.name == 'run backstop'
     runs-on: ubuntu-latest
     container:
-      image: compucorp/civicrm-buildkit:1.0.0-chrome
+      image: deb1990/civicrm-buildkit-docker-deb1990:chrome
 
     env:
       CIVICRM_EXTENSIONS_DIR: site/web/sites/all/modules/civicrm/tools/extensions
@@ -29,7 +29,7 @@ jobs:
       - name: Install dependencies to run the server
         run: |
           apt-get update
-          apt-get install libapache2-mod-php7.2 -y
+          apt-get install -y
           a2enmod rewrite
           apache2ctl restart
 
